@@ -8,13 +8,46 @@ public class MeshGenerator : MonoBehaviour
     Vector3[] vertices;
     int[] triangles;
 
-    public int xSize = 20;
-    public int zSize = 20;
+    public int xPosition;
+    public int zPosition;
 
+    public int xSize = 240;
+    public int zSize = 240;
+
+    public void asignar_posicion(int xpos,int zpos){
+        xPosition = xpos*xSize;
+        zPosition = zpos*zSize;
+        transform.position = new Vector3(xPosition, transform.position.y, zPosition);
+    }
+
+    public float asignar_altura(int x,int z){
+        // y = altura del mapa de colores. Valores entre 0 y 1
+        float y = Mathf.PerlinNoise((x+xPosition)*.005f,(z+zPosition)*.005f)*1f;
+        
+        if(y<=.5f){ // terreno mas plano
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*10f);
+        }
+        if((y>0.5)&&(y<=0.6)){ //terreno poco montañoso
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*30f);
+        }
+        if(y>0.6){ // terreno montañoso
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*50f);
+        }
+        else{
+            return 100f;
+        }
+        
+        /* 
+        return (Mathf.Pow((Mathf.PerlinNoise((x+xPosition)*.01f ,(z+zPosition)*.01f) *1f)+
+            (Mathf.PerlinNoise((x+xPosition)*.02f ,(z+zPosition)*.02f) *.5f)+
+            (Mathf.PerlinNoise((x+xPosition)*.04f ,(z+zPosition)*.04f) * 0.25f),2f))*30f;
+        */
+    }
     // Start is called before the first frame update
     void Start()
     {
         mesh = new Mesh();
+        
         GetComponent<MeshFilter>().mesh = mesh;
         MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         CreateShape();
@@ -24,20 +57,12 @@ public class MeshGenerator : MonoBehaviour
     
     void CreateShape(){
         vertices = new Vector3[(xSize + 1)*(zSize + 1)];
-
-        float offsetx = Random.Range(0,100);
-        float offsetz = Random.Range(0,100);
         
         for(int i=0,z = 0; z <= zSize; z++)
         {
             for(int x = 0;x<=xSize;x++){
-                //float y= Mathf.PerlinNoise(x*.1f ,z*.1f) * 10f;
-                //float y= Mathf.PerlinNoise(x*.1f + offsetx,z*.1f+offsetz) * 10f;
-                //float y= (Mathf.PerlinNoise(x*.1f ,z*.1f) * 5f)+(Mathf.PerlinNoise(x*.2f ,z*.2f) * 2.5f);
-                //float y= (Mathf.PerlinNoise(x*.1f ,z*.1f) * 10f)+(Mathf.PerlinNoise(x*.2f ,z*.2f) * 5f)+(Mathf.PerlinNoise(x*.4f ,z*.4f) * 2.5f);
-                //float y= (Mathf.PerlinNoise(x*.1f ,z*.1f) * 6f)+(Mathf.PerlinNoise(x*.2f ,z*.2f) * 5f)+(Mathf.PerlinNoise(x*.4f ,z*.4f) * 2.5f);
 
-                float y= (Mathf.PerlinNoise(x*.03f ,z*.03f) * 50f)+(Mathf.PerlinNoise(x*.2f ,z*.2f) * 2f)+(Mathf.PerlinNoise(x*.4f ,z*.4f) * 1f);
+                float y= asignar_altura(x,z);
 
                 vertices[i]=new Vector3(x,y,z);
                 i++;
