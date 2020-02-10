@@ -23,15 +23,24 @@ public class MeshGenerator : MonoBehaviour
     public float asignar_altura(int x,int z){
         // y = altura del mapa de colores. Valores entre 0 y 1
         float y = Mathf.PerlinNoise((x+xPosition)*.005f,(z+zPosition)*.005f)*1f;
-        
-        if(y<=.5f){ // terreno mas plano
+         
+        if(y<=.4f){ // terreno mas plano
             return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*10f);
         }
-        if((y>0.5)&&(y<=0.6)){ //terreno poco montañoso
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*30f);
+        if((y>0.4)&&(y<=0.5)){
+            float rango = (y -.4f)/(.5f-.4f);
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*(Mathf.Lerp(10f,50f,rango)));
         }
-        if(y>0.6){ // terreno montañoso
+        if((y>0.5)&&(y<=0.6)){ //terreno poco montañoso
             return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*50f);
+        }
+        if((y>0.6)&&(y<=0.7)){
+            float rango = (y -.6f)/(.7f-.6f);
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*(Mathf.Lerp(50f,100f,rango)));
+        }
+        if(y>0.7){ // terreno montañoso
+            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*100f);
+            //return ((Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f))+(Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*.1f))*100f;
         }
         else{
             return 100f;
@@ -86,7 +95,7 @@ public class MeshGenerator : MonoBehaviour
                 tris +=6;
             }
             vert++;
-        } 
+        }
     }
 
     void UpdateMesh()
@@ -102,6 +111,6 @@ public class MeshGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
