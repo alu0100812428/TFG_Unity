@@ -6,10 +6,32 @@ using UnityEngine;
 public class MeshBrain : MonoBehaviour
 {
     MeshGenerator[,] meshes;
+    public GameObject arbol;
 
     public int xSize = 2;
     public int zSize = 2;
     public float borde = 0.05f;
+    int nTrees=1000;
+
+    void spawnTree(){
+        float x_random = Random.Range(0.0f, xSize*240f);
+        float z_random = Random.Range(0.0f, zSize*240f);
+        int x = (int) x_random/240;
+        int z = (int) z_random/240;
+        int xpos= (int)(x_random -x*240);
+        int zpos= (int)(z_random -z*240);
+        while(!((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=20))){
+            x_random = Random.Range(0.0f, xSize*240f);
+            z_random = Random.Range(0.0f, zSize*240f);
+            x = (int) x_random/240;
+            z = (int) z_random/240;
+            xpos= (int)(x_random -x*240);
+            zpos= (int)(z_random -z*240);
+        }
+
+        Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)-1f,z_random);
+        Instantiate(arbol, position, Quaternion.identity);
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -37,8 +59,11 @@ public class MeshBrain : MonoBehaviour
                // Debug.Log(go.transform.parent);
 
             }
-        } 
-        
+        }
+        for(int i=0;i<nTrees;i++){
+            spawnTree();
+        }
+
     }
 
     // Update is called once per frame
