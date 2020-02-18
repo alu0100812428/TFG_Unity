@@ -9,6 +9,7 @@ public class MeshBrain : MonoBehaviour
 
     public int xSize = 2;
     public int zSize = 2;
+    public float borde = 0.05f;
     
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,8 @@ public class MeshBrain : MonoBehaviour
                 go.layer = 9;
                 meshes[i,j] = go.GetComponent<MeshGenerator>();
                 meshes[i,j].asignar_posicion(i,j);
+                meshes[i,j].asignar_borde(borde);
+                meshes[i,j].asignar_tile(xSize,zSize);
 
                 go.transform.SetParent(this.transform);
 

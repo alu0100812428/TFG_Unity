@@ -12,6 +12,10 @@ public class MeshGenerator : MonoBehaviour
     public int xPosition;
     public int zPosition;
 
+    int xTile;
+    int zTile;
+    float porcentaje_borde;
+
     public int xSize = 240;
     public int zSize = 240;
 
@@ -20,67 +24,68 @@ public class MeshGenerator : MonoBehaviour
         zPosition = zpos*zSize;
         transform.position = new Vector3(xPosition, transform.position.y, zPosition);
     }
+    public void asignar_borde(float borde){
+        porcentaje_borde = borde;
+    }
+    public void asignar_tile(int x,int z){
+        xTile=x;
+        zTile=z;
+    }
 
     public float asignar_altura(int x,int z){
+
+        int xp = x+xPosition;
+        int zp = z+zPosition;
         // y = altura del mapa de colores. Valores entre 0 y 1
-        /*
-        float mapa = Mathf.PerlinNoise((x+xPosition)*.005f,(z+zPosition)*.005f)*1f;
+        float mapa = Mathf.PerlinNoise(xp*.005f,zp*.005f)*1f;
+        /* 
+        if((xp <= 240*xTile*porcentaje_borde)||(xp>=(240*xTile)-(240*xTile*porcentaje_borde))||(zp<= 240*zTile*porcentaje_borde)||(zp>=(240*zTile)-(240*zTile*porcentaje_borde))){
+            mapa = 0.8f;      
+        }*/
+        if(xp <= 240*xTile*porcentaje_borde){
+            float rango=(240*xTile*porcentaje_borde -xp)/(240*xTile*porcentaje_borde);
+            mapa = Mathf.Lerp(mapa,0.8f,rango);
+        }
+        if(xp>=(240*xTile)-(240*xTile*porcentaje_borde)){
+            float rango=(240*xTile-xp)/(240*xTile*porcentaje_borde);
+            mapa = Mathf.Lerp(mapa,0.8f,1-rango);
+        }
+        if(zp <= 240*zTile*porcentaje_borde){
+            float rango=(240*zTile*porcentaje_borde -zp)/(240*zTile*porcentaje_borde);
+            mapa = Mathf.Lerp(mapa,0.8f,rango);
+        }
+        if(zp>=(240*zTile)-(240*zTile*porcentaje_borde)){
+            float rango=(240*zTile-zp)/(240*zTile*porcentaje_borde);
+            mapa = Mathf.Lerp(mapa,0.8f,1-rango);
+        }
+        float f1=.02f;
+        float f2=.05f;
+        float f3=.1f;
+
+        float a1 =10f;
+        float a2=20f;
+        float a3=50f;
 
         if(mapa<0.5){
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*10f);
-            //return 0;
+            return (Mathf.PerlinNoise(xp*f1,zp*f1)*a1);
         }
-        if((mapa>=0.5)&&(mapa<0.6)){
+
+        if((mapa>=.5)&&(mapa<0.6)){
             float rango = (mapa -.5f)/(.6f-.5f);
-            return ((Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)+
-            (Mathf.PerlinNoise((x+xPosition)*.05f,(z+zPosition)*.05f))))*Mathf.Lerp(0f,20f,rango);
-        }
-        if((mapa>=0.6)&&(mapa<0.7)){
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)+
-            Mathf.PerlinNoise((x+xPosition)*.05f,(z+zPosition)*.05f))*20f;
-        }
-        if((mapa>0.7)&&(mapa<0.85)){
-            float rango = (mapa -.7f)/(.85f-.7f);
-            return ((Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)+
-            (Mathf.PerlinNoise((x+xPosition)*.05f,(z+zPosition)*.05f))+
-            (Mathf.PerlinNoise((x+xPosition)*.1f,(z+zPosition)*.1f))))*Mathf.Lerp(15f,50f,rango);
-        }
-        if(mapa>=.85){
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)+
-            Mathf.PerlinNoise((x+xPosition)*.05f,(z+zPosition)*.05f)+
-            Mathf.PerlinNoise((x+xPosition)*.1f,(z+zPosition)*.1f))*50f;
-        }
-        return mapa;
-        */
-        float y = Mathf.PerlinNoise((x+xPosition)*.005f,(z+zPosition)*.005f)*1f;
-         
-        if(y<=.4f){ // terreno mas plano
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*10f);
-        }
-        if((y>0.4)&&(y<=0.5)){
-            float rango = (y -.4f)/(.5f-.4f);
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*(Mathf.Lerp(10f,50f,rango)));
-        }
-        if((y>0.5)&&(y<=0.6)){ //terreno poco montañoso
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*50f);
-        }
-        if((y>0.6)&&(y<=0.7)){
-            float rango = (y -.6f)/(.7f-.6f);
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*(Mathf.Lerp(50f,100f,rango)));
-        }
-        if(y>0.7){ // terreno montañoso
-            return (Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*100f);
-            //return ((Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f))+(Mathf.PerlinNoise((x+xPosition)*.02f,(z+zPosition)*.02f)*.1f))*100f;
-        }
-        else{
-            return 100f;
+            return Mathf.Lerp(Mathf.PerlinNoise(xp*f1,zp*f1)*a1,(Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2,rango);
         }
         
-        /* 
-        return (Mathf.Pow((Mathf.PerlinNoise((x+xPosition)*.01f ,(z+zPosition)*.01f) *1f)+
-            (Mathf.PerlinNoise((x+xPosition)*.02f ,(z+zPosition)*.02f) *.5f)+
-            (Mathf.PerlinNoise((x+xPosition)*.04f ,(z+zPosition)*.04f) * 0.25f),2f))*30f;
-        */
+        if((mapa>=0.6)&&(mapa<0.7)){
+            return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2;
+        }
+        if((mapa>=0.7)&&(mapa<0.8)){
+            float rango = (mapa -.7f)/(.8f-.7f);
+            return Mathf.Lerp((Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2,(Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3,rango);
+        }
+        if(mapa>=0.8){
+            return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3;
+        }
+        return 100f;
     }
     // Start is called before the first frame update
     void Start()
