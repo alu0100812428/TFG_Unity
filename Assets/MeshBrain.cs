@@ -52,7 +52,7 @@ public class MeshBrain : MonoBehaviour
         }
 
         Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)+.3f,z_random);
-        Instantiate(grass, position, Quaternion.Euler(90, Random.Range(0f, 360f), 0));
+        Instantiate(grass, position, Quaternion.Euler(0, Random.Range(0f, 360f), 0));
     }
     
     // Start is called before the first frame update
