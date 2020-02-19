@@ -7,11 +7,13 @@ public class MeshBrain : MonoBehaviour
 {
     MeshGenerator[,] meshes;
     public GameObject arbol;
+    public GameObject grass;
 
     public int xSize = 2;
     public int zSize = 2;
     public float borde = 0.05f;
     int nTrees=1000;
+    int nGrass = 100000;
 
     void spawnTree(){
         float x_random = Random.Range(0.0f, xSize*240f);
@@ -31,6 +33,26 @@ public class MeshBrain : MonoBehaviour
 
         Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)-1f,z_random);
         Instantiate(arbol, position, Quaternion.identity);
+    }
+
+    void spawnGrass(){
+        float x_random = Random.Range(0.0f, xSize*240f);
+        float z_random = Random.Range(0.0f, zSize*240f);
+        int x = (int) x_random/240;
+        int z = (int) z_random/240;
+        int xpos= (int)(x_random -x*240);
+        int zpos= (int)(z_random -z*240);
+        while(meshes[x,z].asignar_altura(xpos,zpos)>=10){
+            x_random = Random.Range(0.0f, xSize*240f);
+            z_random = Random.Range(0.0f, zSize*240f);
+            x = (int) x_random/240;
+            z = (int) z_random/240;
+            xpos= (int)(x_random -x*240);
+            zpos= (int)(z_random -z*240);
+        }
+
+        Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)+.3f,z_random);
+        Instantiate(grass, position, Quaternion.Euler(90, Random.Range(0f, 360f), 0));
     }
     
     // Start is called before the first frame update
@@ -62,6 +84,9 @@ public class MeshBrain : MonoBehaviour
         }
         for(int i=0;i<nTrees;i++){
             spawnTree();
+        }
+        for(int i=0;i<nGrass;i++){
+            spawnGrass();
         }
 
     }

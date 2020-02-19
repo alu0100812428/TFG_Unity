@@ -243,6 +243,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: xSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: zSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: borde
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: arbol
+      value: 
+      objectReference: {fileID: 100000, guid: 7163db7426b13a345b09fa28a500a5e6, type: 3}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: grass
+      value: 
+      objectReference: {fileID: 3213595697871327234, guid: 0c76b99f742b16d4d930b84b563a2475,
+        type: 3}
     - target: {fileID: 7676690009619262452, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: m_Name
