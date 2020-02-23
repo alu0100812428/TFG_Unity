@@ -9,16 +9,34 @@ public class MeshGenerator : MonoBehaviour
     int[] triangles;
     Vector2[] uvs;
 
-    public int xPosition;
-    public int zPosition;
+    MeshCollider meshc;
 
-    int xTile;
-    int zTile;
-    float porcentaje_borde;
-    float map_seed=0;
+    public GameObject player;
 
-    public int xSize = 240;
-    public int zSize = 240;
+    public int xPosition;   //posicion x del mundo. Se usa para mover el mesh a su posición.
+    public int zPosition;   //posicion z del mundo
+
+    public bool collision;
+
+    public int xTile;   //Coordena x que va de 0 hasta el numero de meshes que se hayan creado
+    public int zTile;   //Coordena z que va de 0 hasta el numero de meshes que se hayan creado
+
+    int xMapSize;       //Numero total de meshes en el eje x
+    int zMapSize;       //Numero total de meshes en el eje z
+    float porcentaje_borde; //valor entre 0.0 y 1.0 para definir cuanto borde se quiere aplicar al mapa
+    float map_seed=0;   //Semilla que se usará para crear el mapa
+
+    public int xSize = 240;     //Tamaño en el eje x del mesh
+    public int zSize = 240;     //Tamaño en el eje z del mesh
+
+    bool player_is_near(){
+        if((player.transform.position.x>xTile*240)&&(player.transform.position.x < xTile*240 +240)&&(player.transform.position.z>zTile*240)&&(player.transform.position.z < zTile*240 +240)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public void asignar_posicion(int xpos,int zpos){
         xPosition = xpos*xSize;
@@ -28,81 +46,130 @@ public class MeshGenerator : MonoBehaviour
     public void asignar_borde(float borde){
         porcentaje_borde = borde;
     }
-    public void asignar_tile(int x,int z){
+    public void asignar_tile(int x,int z,int xmap,int zmap){
         xTile=x;
         zTile=z;
+        xMapSize = xmap;
+        zMapSize = zmap;
     }
 
     public void set_seed(float nSeed){
         map_seed = nSeed;
     }
 
+    float flat(int x,int z){
+        int xp = x+xPosition;
+        int zp = z+zPosition;
+        float f1=.01f;//.02
+        float f2=.025f;//.05
+        float f3=.05f;//.1
+
+        float a1 =10f;//10
+        float a2=40f;//20
+        float a3=100f;//50
+        return (Mathf.PerlinNoise(xp*f1,zp*f1)*a1);
+    }
+    float hill(int x,int z){
+        int xp = x+xPosition;
+        int zp = z+zPosition;
+        float f1=.01f;//.02
+        float f2=.025f;//.05
+        float f3=.05f;//.1
+
+        float a1 =10f;//10
+        float a2=40f;//20
+        float a3=100f;//50
+        return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2 + Mathf.PerlinNoise(xp*0.2f,zp*0.2f)*2.0f;
+    }
+    float mountain(int x, int z){
+        int xp = x+xPosition;
+        int zp = z+zPosition;
+        float f1=.005f;//.02
+        float f2=.012f;//.05
+        float f3=.025f;//.1
+
+        float a1 =10f;//10
+        float a2=40f;//20
+        float a3=100f;//50
+        return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3+Mathf.PerlinNoise(xp*0.1f,zp*0.1f)*15.0f+Mathf.PerlinNoise(xp*0.2f,zp*0.2f)*10.0f;
+    }
+
     public float asignar_altura(int x,int z){
 
         int xp = x+xPosition;
         int zp = z+zPosition;
-        float frec = .004f; //.005
+
+        float frec = .002f; //.005
         // y = altura del mapa de colores. Valores entre 0 y 1
         float mapa = Mathf.PerlinNoise((xp+map_seed)*frec,(zp+map_seed)*frec)*1f;
         /* 
         if((xp <= 240*xTile*porcentaje_borde)||(xp>=(240*xTile)-(240*xTile*porcentaje_borde))||(zp<= 240*zTile*porcentaje_borde)||(zp>=(240*zTile)-(240*zTile*porcentaje_borde))){
             mapa = 0.8f;      
         }*/
-        if(xp <= 240*xTile*porcentaje_borde){
-            float rango=(240*xTile*porcentaje_borde -xp)/(240*xTile*porcentaje_borde);
+        if(xp <= 240*xMapSize*porcentaje_borde){
+            float rango=(240*xMapSize*porcentaje_borde -xp)/(240*xMapSize*porcentaje_borde);
             mapa = Mathf.Lerp(mapa,0.85f,rango);
         }
-        if(xp>=(240*xTile)-(240*xTile*porcentaje_borde)){
-            float rango=(240*xTile-xp)/(240*xTile*porcentaje_borde);
+        if(xp>=(240*xMapSize)-(240*xMapSize*porcentaje_borde)){
+            float rango=(240*xMapSize-xp)/(240*xMapSize*porcentaje_borde);
             mapa = Mathf.Lerp(mapa,0.85f,1-rango);
         }
-        if(zp <= 240*zTile*porcentaje_borde){
-            float rango=(240*zTile*porcentaje_borde -zp)/(240*zTile*porcentaje_borde);
+        if(zp <= 240*zMapSize*porcentaje_borde){
+            float rango=(240*zMapSize*porcentaje_borde -zp)/(240*zMapSize*porcentaje_borde);
             mapa = Mathf.Lerp(mapa,0.85f,rango);
         }
-        if(zp>=(240*zTile)-(240*zTile*porcentaje_borde)){
-            float rango=(240*zTile-zp)/(240*zTile*porcentaje_borde);
+        if(zp>=(240*zMapSize)-(240*zMapSize*porcentaje_borde)){
+            float rango=(240*zMapSize-zp)/(240*zMapSize*porcentaje_borde);
             mapa = Mathf.Lerp(mapa,0.85f,1-rango);
         }
+
         float f1=.01f;//.02
         float f2=.025f;//.05
         float f3=.05f;//.1
 
         float a1 =10f;//10
-        float a2=20f;//20
+        float a2=40f;//20
         float a3=100f;//50
 
         if(mapa<0.4){
-            return (Mathf.PerlinNoise(xp*f1,zp*f1)*a1);
+            return flat(x,z);
         }
 
         if((mapa>=.4)&&(mapa<0.6)){
             float rango = (mapa -.4f)/(.6f-.4f);
-            return Mathf.Lerp(Mathf.PerlinNoise(xp*f1,zp*f1)*a1,(Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2,rango);
+            return Mathf.Lerp(flat(x,z),hill(x,z),rango);
         }
         
         if((mapa>=0.6)&&(mapa<0.7)){
-            return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2;
+            return hill(x,z);
         }
         if((mapa>=0.7)&&(mapa<0.85)){
             float rango = (mapa -.7f)/(.85f-.7f);
-            return Mathf.Lerp((Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2,(Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3,rango);
+            return Mathf.Lerp(hill(x,z),mountain(x,z),rango);
         }
         if(mapa>=0.85){
-            return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3;
+            return mountain(x,z);
         }
         return 100f;
     }
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("player");
         mesh = new Mesh();
         
         GetComponent<MeshFilter>().mesh = mesh;
-        MeshCollider meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         CreateShape();
         UpdateMesh();
+        if(player_is_near()){
+            meshc.enabled = true;
+        }
+        else{
+            meshc.enabled = false;
+        }
         meshc.sharedMesh = mesh;
+        
     }
     
     void CreateShape(){
@@ -158,6 +225,14 @@ public class MeshGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
+        if(player_is_near()){
+            meshc.enabled = true;
+            //GetComponent<MeshCollider>().enabled = true;
+        }
+        else{
+            meshc.enabled = false;
+            //GetComponent<MeshCollider>().enabled = false;
+        }
     }
 }

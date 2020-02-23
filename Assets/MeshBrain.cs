@@ -12,8 +12,8 @@ public class MeshBrain : MonoBehaviour
     public int xSize = 2;
     public int zSize = 2;
     public float borde = 0.05f;
-    int nTrees=1000;
-    int nGrass = 10000;
+    public int nTrees=1000;
+    public int nGrass = 10000;
 
     public bool set_seed=true;
 
@@ -24,7 +24,7 @@ public class MeshBrain : MonoBehaviour
         int z = (int) z_random/240;
         int xpos= (int)(x_random -x*240);
         int zpos= (int)(z_random -z*240);
-        while(!((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=20))){
+        while(!((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=40))){
             x_random = Random.Range(0.0f, xSize*240f-1f);
             z_random = Random.Range(0.0f, zSize*240f-1f);
             x = (int) x_random/240;
@@ -77,7 +77,7 @@ public class MeshBrain : MonoBehaviour
                 meshes[i,j] = go.GetComponent<MeshGenerator>();
                 meshes[i,j].asignar_posicion(i,j);
                 meshes[i,j].asignar_borde(borde);
-                meshes[i,j].asignar_tile(xSize,zSize);
+                meshes[i,j].asignar_tile(i,j,xSize,zSize);
                 if(set_seed){
                     meshes[i,j].set_seed(seed);
                 }

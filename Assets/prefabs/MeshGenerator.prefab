@@ -92,11 +92,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPosition: 0
   zPosition: 0
-  a1: 50
-  a2: 2
-  a3: 1
-  f1: 0.03
-  f2: 0.2
-  f3: 0.4
   xSize: 100
   zSize: 100
