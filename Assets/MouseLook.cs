@@ -19,6 +19,12 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetButton("Fire1")){
+            Camera.main.fieldOfView = 20;
+        }
+        else{
+            Camera.main.fieldOfView = 60;
+        }
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
