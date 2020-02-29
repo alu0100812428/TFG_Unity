@@ -168,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 9051264031304159396, guid: 5c3c371e745d98b48bf30f8789b68d10,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9051264031304159396, guid: 5c3c371e745d98b48bf30f8789b68d10,
         type: 3}
@@ -184,6 +184,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051264031304159399, guid: 5c3c371e745d98b48bf30f8789b68d10,
+        type: 3}
+      propertyPath: gravity
+      value: -9.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051264031304159399, guid: 5c3c371e745d98b48bf30f8789b68d10,
+        type: 3}
+      propertyPath: speed
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c3c371e745d98b48bf30f8789b68d10, type: 3}
@@ -306,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 7676690009619262450, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262450, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
@@ -331,12 +341,12 @@ PrefabInstance:
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: xSize
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: zSize
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
@@ -347,7 +357,8 @@ PrefabInstance:
         type: 3}
       propertyPath: arbol
       value: 
-      objectReference: {fileID: 100000, guid: 7163db7426b13a345b09fa28a500a5e6, type: 3}
+      objectReference: {fileID: 6906899653757740962, guid: 5ef239814a1cd064d9c3f8c8e0022444,
+        type: 3}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: grass
@@ -368,22 +379,26 @@ PrefabInstance:
         type: 3}
       propertyPath: arbol2
       value: 
-      objectReference: {fileID: 100000, guid: 8606c21208a6abf4aa86e39e9938598b, type: 3}
+      objectReference: {fileID: 3624511750112591464, guid: f6ac2d6ef7c5f2549bed01f54b7755c2,
+        type: 3}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: rock.Array.data[0]
       value: 
-      objectReference: {fileID: 110610, guid: 75283e9ef15245c4aab126ec6525dd2a, type: 3}
+      objectReference: {fileID: 5439634764696276209, guid: c7ecf840c0db37c438662045590d9916,
+        type: 3}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: rock.Array.data[1]
       value: 
-      objectReference: {fileID: 163546, guid: 329d0b0187f24cd4da9f775d83708bd6, type: 3}
+      objectReference: {fileID: 8537162814208959833, guid: e44be509f1aa2a04a8ee87423668fe6a,
+        type: 3}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: rock.Array.data[2]
       value: 
-      objectReference: {fileID: 119512, guid: 5578b82f17c954843901e8b68ca21dcc, type: 3}
+      objectReference: {fileID: 2148633981490024137, guid: 1810f79ada624df4da38d0c50941ed83,
+        type: 3}
     - target: {fileID: 7676690009619262452, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: m_Name

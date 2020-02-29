@@ -9,6 +9,8 @@ public class MeshGenerator : MonoBehaviour
     int[] triangles;
     Vector2[] uvs;
 
+    int lod=1;
+
     MeshCollider meshc;
 
     public GameObject player;
@@ -28,6 +30,25 @@ public class MeshGenerator : MonoBehaviour
 
     public int xSize = 240;     //Tamaño en el eje x del mesh
     public int zSize = 240;     //Tamaño en el eje z del mesh
+
+    bool use_lod = true;
+
+    void mesh_lod(){
+        if(use_lod){
+            if((player.transform.position.x>xTile*240-240)&&(player.transform.position.x < xTile*240 +480)&&(player.transform.position.z>zTile*240-240)&&(player.transform.position.z < zTile*240+480)){
+                lod = 1;
+            }
+            else{
+                if((player.transform.position.x>xTile*240-480)&&(player.transform.position.x < xTile*240 +720)&&(player.transform.position.z>zTile*240-480)&&(player.transform.position.z < zTile*240+720)){
+                    lod = 2;
+                }
+                else{
+                    lod= 4;
+                }
+            }
+        }
+        
+    }
 
     bool player_is_near(){
         if((player.transform.position.x>xTile*240)&&(player.transform.position.x < xTile*240 +240)&&(player.transform.position.z>zTile*240)&&(player.transform.position.z < zTile*240 +240)){
@@ -157,32 +178,28 @@ public class MeshGenerator : MonoBehaviour
     {
         player = GameObject.Find("player");
         mesh = new Mesh();
-        
+        mesh_lod();
+
         GetComponent<MeshFilter>().mesh = mesh;
         meshc = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         CreateShape();
         UpdateMesh();
-        if(player_is_near()){
-            meshc.enabled = true;
-        }
-        else{
-            meshc.enabled = false;
-        }
+        //meshc.enabled= false;
         meshc.sharedMesh = mesh;
         
     }
     
     void CreateShape(){
-        vertices = new Vector3[(xSize + 1)*(zSize + 1)];
+        vertices = new Vector3[((xSize/lod) + 1)*((zSize/lod) + 1)];
         uvs = new Vector2[vertices.Length];
         
-        for(int i=0,z = 0; z <= zSize; z++)
+        for(int i=0,z = 0; z <= zSize/lod; z++)
         {
-            for(int x = 0;x<=xSize;x++){
+            for(int x = 0;x<=xSize/lod;x++){
 
-                float y= asignar_altura(x,z);
+                float y= asignar_altura(x*lod,z*lod);
 
-                vertices[i]=new Vector3(x,y,z);
+                vertices[i]=new Vector3(x*lod,y,z*lod);
                 i++;
             }
         }
@@ -191,18 +208,19 @@ public class MeshGenerator : MonoBehaviour
         {
             uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
         }    
-        triangles = new int[xSize * zSize * 6];
+        triangles = new int[xSize/lod * zSize/lod * 6];
 
         int vert= 0;
         int tris = 0;
-        for(int z=0;z<zSize;z++){
-            for(int x=0;x<xSize;x++){
+        int suma=0;
+        for(int z=0;z<zSize/lod;z++){
+            for(int x=0;x<xSize/lod;x++){
                 triangles[tris + 0] = vert + 0;
-                triangles[tris + 1] = vert + xSize + 1;
+                triangles[tris + 1] = vert + xSize/lod + 1;
                 triangles[tris + 2] = vert + 1;
                 triangles[tris + 3] = vert + 1;
-                triangles[tris + 4] = vert + xSize +1;
-                triangles[tris + 5] = vert + xSize +2;
+                triangles[tris + 4] = vert + xSize/lod +1;
+                triangles[tris + 5] = vert + xSize/lod +2;
 
                 vert++;
                 tris +=6;
@@ -225,7 +243,21 @@ public class MeshGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(use_lod){
+            int last_lod =lod;
+            mesh_lod();
+            if(last_lod!=lod){
+                CreateShape();
+                UpdateMesh();
+                if(lod==1){
+                    meshc.sharedMesh = mesh;
+                }
+
+            }
+        }
         
+        //meshc.enabled = true;
+        /* 
         if(player_is_near()){
             meshc.enabled = true;
             //GetComponent<MeshCollider>().enabled = true;
@@ -234,5 +266,6 @@ public class MeshGenerator : MonoBehaviour
             meshc.enabled = false;
             //GetComponent<MeshCollider>().enabled = false;
         }
+        */
     }
 }

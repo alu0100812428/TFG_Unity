@@ -14,7 +14,7 @@ public class MeshBrain : MonoBehaviour
     public int xSize = 2;
     public int zSize = 2;
     public float borde = 0.05f;
-    int nTrees=100;
+    int nTrees=1000;
     int nGrass = 5000;
     int nRocks = 10;
 
@@ -128,6 +128,7 @@ public class MeshBrain : MonoBehaviour
 
             }
         }
+        /* 
         for(int i=0;i<nRocks;i++){
             spawnRocks();
         }
@@ -138,7 +139,7 @@ public class MeshBrain : MonoBehaviour
         for(int i=0;i<nGrass;i++){
             spawnGrass();
         }
-        
+        */
 
     }
 
