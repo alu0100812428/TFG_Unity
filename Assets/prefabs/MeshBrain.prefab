@@ -43,5 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61950c17431555b40b525e70ac04b865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 3
-  zSize: 3
+  arbol: {fileID: 6906899653757740962, guid: 5ef239814a1cd064d9c3f8c8e0022444, type: 3}
+  arbol2: {fileID: 3624511750112591464, guid: f6ac2d6ef7c5f2549bed01f54b7755c2, type: 3}
+  grass: {fileID: 3213595697871327234, guid: 0c76b99f742b16d4d930b84b563a2475, type: 3}
+  rock:
+  - {fileID: 5439634764696276209, guid: c7ecf840c0db37c438662045590d9916, type: 3}
+  - {fileID: 8537162814208959833, guid: e44be509f1aa2a04a8ee87423668fe6a, type: 3}
+  - {fileID: 2148633981490024137, guid: 1810f79ada624df4da38d0c50941ed83, type: 3}
+  xSize: 10
+  zSize: 10
+  borde: 0.1
+  set_seed: 1

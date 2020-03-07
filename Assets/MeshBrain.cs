@@ -15,7 +15,7 @@ public class MeshBrain : MonoBehaviour
     public int zSize = 2;
     public float borde = 0.05f;
     int nTrees=1000;
-    int nGrass = 5000;
+    int nGrass = 1000;
     int nRocks = 10;
 
     public bool set_seed=true;
@@ -27,16 +27,6 @@ public class MeshBrain : MonoBehaviour
         int z = (int) z_random/240;
         int xpos= (int)(x_random -x*240);
         int zpos= (int)(z_random -z*240);
-        /* 
-        while(!((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=40))){
-            x_random = Random.Range(0.0f, xSize*240f-1f);
-            z_random = Random.Range(0.0f, zSize*240f-1f);
-            x = (int) x_random/240;
-            z = (int) z_random/240;
-            xpos= (int)(x_random -x*240);
-            zpos= (int)(z_random -z*240);
-        }
-        */
         if(((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=40))){
             Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)-1f,z_random);
             Instantiate(arbol, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
@@ -55,17 +45,6 @@ public class MeshBrain : MonoBehaviour
         int z = (int) z_random/240;
         int xpos= (int)(x_random -x*240);
         int zpos= (int)(z_random -z*240);
-        /* 
-        while(meshes[x,z].asignar_altura(xpos,zpos)>=10){
-            x_random = Random.Range(0.0f, xSize*240f-1f);
-            z_random = Random.Range(0.0f, zSize*240f-1f);
-            x = (int) x_random/240;
-            z = (int) z_random/240;
-            xpos= (int)(x_random -x*240);
-            zpos= (int)(z_random -z*240);
-        }
-        */
- 
         if(meshes[x,z].asignar_altura(xpos,zpos)<=10){
             Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)+.3f,z_random);
             Instantiate(grass, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
@@ -79,15 +58,6 @@ public class MeshBrain : MonoBehaviour
         int z = (int) z_random/240;
         int xpos= (int)(x_random -x*240);
         int zpos= (int)(z_random -z*240);
-        /* 
-        while(meshes[x,z].asignar_altura(xpos,zpos)>=50){
-            x_random = Random.Range(0.0f, xSize*240f-1f);
-            z_random = Random.Range(0.0f, zSize*240f-1f);
-            x = (int) x_random/240;
-            z = (int) z_random/240;
-            xpos= (int)(x_random -x*240);
-            zpos= (int)(z_random -z*240);
-        }*/
         if(meshes[x,z].asignar_altura(xpos,zpos)<=50){
             Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos),z_random);
             Instantiate(rock[Random.Range(0,rock.Length)], position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
@@ -100,7 +70,7 @@ public class MeshBrain : MonoBehaviour
         meshes = new MeshGenerator[xSize,zSize];
         Material material = Resources.Load("materialbasico", typeof(Material)) as Material;
 
-        float seed = Random.Range(0.0f, 1000f);
+        float seed = Random.Range(0.0f, 10000000f);
 
         nTrees = xSize*zSize*nTrees;
         nGrass = xSize*zSize*nGrass;
@@ -128,7 +98,7 @@ public class MeshBrain : MonoBehaviour
 
             }
         }
-        /* 
+        
         for(int i=0;i<nRocks;i++){
             spawnRocks();
         }
@@ -139,8 +109,8 @@ public class MeshBrain : MonoBehaviour
         for(int i=0;i<nGrass;i++){
             spawnGrass();
         }
-        */
-
+        
+        
     }
 
     // Update is called once per frame
