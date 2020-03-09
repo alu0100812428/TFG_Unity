@@ -51,7 +51,7 @@ public class MeshGenerator : MonoBehaviour
     }
 
     bool player_is_near(){
-        if((player.transform.position.x>xTile*240)&&(player.transform.position.x < xTile*240 +240)&&(player.transform.position.z>zTile*240)&&(player.transform.position.z < zTile*240 +240)){
+        if((player.transform.position.x>=xTile*240)&&(player.transform.position.x <= xTile*240 +240)&&(player.transform.position.z>=zTile*240)&&(player.transform.position.z <= zTile*240 +240)){
             return true;
         }
         else{
@@ -231,7 +231,7 @@ public class MeshGenerator : MonoBehaviour
             if(last_lod!=lod){
                 CreateShape();
                 UpdateMesh();
-                if(lod==1){
+                if((lod==1)&&(player_is_near())){
                     meshc.sharedMesh = mesh;
                 }
 

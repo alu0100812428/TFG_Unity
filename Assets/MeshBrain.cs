@@ -19,6 +19,7 @@ public class MeshBrain : MonoBehaviour
     int nRocks = 10;
 
     public bool set_seed=true;
+    public bool set_objects = true;
 
     void spawnTree(){
         float x_random = Random.Range(0.0f, xSize*240f-1f);
@@ -99,15 +100,17 @@ public class MeshBrain : MonoBehaviour
             }
         }
         
-        for(int i=0;i<nRocks;i++){
-            spawnRocks();
-        }
-         
-        for(int i=0;i<nTrees;i++){
-            spawnTree();
-        }
-        for(int i=0;i<nGrass;i++){
-            spawnGrass();
+        if(set_objects){
+            for(int i=0;i<nRocks;i++){
+                spawnRocks();
+            }
+            
+            for(int i=0;i<nTrees;i++){
+                spawnTree();
+            }
+            for(int i=0;i<nGrass;i++){
+                spawnGrass();
+            }
         }
         
         
