@@ -4,6 +4,7 @@
     {
         _Color ("Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _BumpMap ("Bumpmap", 2D) = "bump" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
@@ -22,12 +23,14 @@
         #pragma target 3.0
 
         sampler2D _MainTex;
+        sampler2D _BumpMap;
 
         uniform float _Cutoff;
 
         struct Input
         {
             float2 uv_MainTex;
+            float2 uv_BumpMap;
         };
 
         half _Glossiness;
@@ -53,6 +56,7 @@
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
+            o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
         }
         ENDCG
     }

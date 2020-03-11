@@ -17,6 +17,8 @@
         _Glossiness3 ("Smoothness 3", Range(0,1)) = 0.5
         _Metallic3 ("Metallic 3", Range(0,1)) = 0.0
 
+        _BumpMap ("Bumpmap", 2D) = "bump" {}
+
         _Color4 ("Color", Color) = (1,1,1,1)
         _SnowTex ("Snow Texture", 2D) = "white" {}
         _Glossiness4 ("Smoothness 4", Range(0,1)) = 0.5
@@ -39,6 +41,7 @@
         sampler2D _MainTex;
         sampler2D _SecondTex;
         sampler2D _ThirdTex;
+        sampler2D _BumpMap;
         sampler2D _SnowTex;
 
         struct Input
@@ -46,8 +49,10 @@
             float2 uv_MainTex;
             float2 uv_SecondTex;
             float2 uv_ThirdTex;
+            float2 uv_BumpMap;
             float2 uv_SnowTex;
             float3 worldPos;
+            float3 worldNormal;
         };
 
         half _Glossiness;
@@ -98,7 +103,7 @@
                 o.Smoothness =lerp(_Glossiness2, _Glossiness3,rango);
             }
             if(IN.worldPos.y >= 30){
-                
+                //o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
                 if((IN.worldPos.y >=70)&&(o.Normal.y > _snow)){
                     float rango = (o.Normal.y - _snow)/(1.0f-_snow);
                     if(IN.worldPos.y > 85){

@@ -15,7 +15,7 @@ public class MeshBrain : MonoBehaviour
     public int zSize = 2;
     public float borde = 0.05f;
     int nTrees=1000;
-    int nGrass = 1000;
+    int nGrass = 2000;
     int nRocks = 10;
 
     public bool set_seed=true;
