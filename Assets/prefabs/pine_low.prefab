@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8505708204684196139}
   - component: {fileID: 8505708204683099115}
   m_Layer: 0
-  m_Name: baum ld2 mobile
+  m_Name: pine_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
