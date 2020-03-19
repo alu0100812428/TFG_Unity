@@ -78,41 +78,38 @@ public class MeshGenerator : MonoBehaviour
         map_seed = nSeed;
     }
 
-    float flat(int x,int z){
-        int xp = x+xPosition;
-        int zp = z+zPosition;
+    float flat(float x,float z){
+        float xp = x+xPosition;
+        float zp = z+zPosition;
         float f1=.01f;//.02
 
         float a1 =10f;//10
         return (Mathf.PerlinNoise(xp*f1,zp*f1)*a1);
     }
-    float hill(int x,int z){
-        int xp = x+xPosition;
-        int zp = z+zPosition;
+    float hill(float x,float z){
+        float xp = x+xPosition;
+        float zp = z+zPosition;
         float f1=.01f;//.02
         float f2=.025f;//.05
 
-        float a1 =10f;//10
         float a2=40f;//20
         return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2))*a2 + Mathf.PerlinNoise(xp*0.2f,zp*0.2f)*2.0f;
     }
-    float mountain(int x, int z){
-        int xp = x+xPosition;
-        int zp = z+zPosition;
+    float mountain(float x, float z){
+        float xp = x+xPosition;
+        float zp = z+zPosition;
         float f1=.005f;//.02
         float f2=.012f;//.05
         float f3=.025f;//.1
 
-        float a1 =10f;//10
-        float a2=40f;//20
         float a3=100f;//50
         return (Mathf.PerlinNoise(xp*f1,zp*f1)+Mathf.PerlinNoise(xp*f2,zp*f2)+Mathf.PerlinNoise(xp*f3,zp*f3))*a3+Mathf.PerlinNoise(xp*0.1f,zp*0.1f)*15.0f+Mathf.PerlinNoise(xp*0.2f,zp*0.2f)*10.0f;
     }
 
-    public float asignar_altura(int x,int z){
+    public float asignar_altura(float x,float z){
 
-        int xp = x+xPosition;
-        int zp = z+zPosition;
+        float xp = x+xPosition;
+        float zp = z+zPosition;
 
         float frec = .002f; //.005
         float mapa = Mathf.PerlinNoise((xp+map_seed)*frec,(zp+map_seed)*frec)*1f;
@@ -228,13 +225,13 @@ public class MeshGenerator : MonoBehaviour
         if(use_lod){
             int last_lod =lod;
             mesh_lod();
+            if((lod==1)&&(player_is_near())){   //si el lod es el de maximo detalle y el jugador se encuentra en ese mismo mesh, se cambia el collider
+                meshc.sharedMesh = mesh;
+            }
+
             if(last_lod!=lod){
                 CreateShape();
-                UpdateMesh();
-                if((lod==1)&&(player_is_near())){
-                    meshc.sharedMesh = mesh;
-                }
-
+                UpdateMesh();                
             }
         }
     }
