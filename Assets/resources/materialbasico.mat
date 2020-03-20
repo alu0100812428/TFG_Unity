@@ -23,6 +23,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 817cd585ba4526143b4731066b0f0144, type: 3}
         m_Scale: {x: 0.1, y: 0.1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMap2:
+        m_Texture: {fileID: 2800000, guid: c737b525eb69287479c9cfc945968a62, type: 3}
+        m_Scale: {x: 0.1, y: 0.1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap3:
+        m_Texture: {fileID: 2800000, guid: 310d1ec2ed5c49b4abeeb1835a5d28c2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _CliffTex:
         m_Texture: {fileID: 2800000, guid: 54ccdb26b5047c54b828ced4bf15ca47, type: 3}
         m_Scale: {x: 0.1, y: 0.1}
@@ -60,8 +68,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SecondTex:
-        m_Texture: {fileID: 2800000, guid: 1196d0ee3dd8f01478eddc8b8bdb3e20, type: 3}
-        m_Scale: {x: 0.1, y: 0.1}
+        m_Texture: {fileID: 2800000, guid: f556ac1fff90b504d8a8d6cca2c47706, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _SnowTex:
         m_Texture: {fileID: 2800000, guid: 1f27a16ed04f7e0499cca9e2d233da4c, type: 3}
@@ -93,7 +101,7 @@ Material:
     - _Glossiness5: 0.2
     - _GlossyReflections: 1
     - _Metallic: 0.1
-    - _Metallic2: 0.1
+    - _Metallic2: 0.48
     - _Metallic3: 0.152
     - _Metallic4: 0.431
     - _Metallic5: 0.152
@@ -110,7 +118,7 @@ Material:
     - _snow: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color2: {r: 0.4528302, g: 0.26073027, b: 0.03203987, a: 1}
     - _Color3: {r: 1, g: 1, b: 1, a: 1}
     - _Color4: {r: 1, g: 1, b: 1, a: 1}
     - _Color5: {r: 1, g: 1, b: 1, a: 1}
