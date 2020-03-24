@@ -87,9 +87,21 @@
             }
             if((IN.worldPos.y >= 10)&&(IN.worldPos.y < 11)){
                 float rango = (IN.worldPos.y - 10)/(11-10);
-                c=lerp (tex2D (_MainTex, IN.uv_MainTex), tex2D (_SecondTex, IN.uv_SecondTex), rango) *lerp(_Color,_Color2,rango);
-                o.Metallic = lerp(_Metallic, _Metallic2,rango);
-                o.Smoothness =lerp(_Glossiness, _Glossiness2,rango);
+                if(o.Normal.y > 0.75f){
+                    c=lerp (tex2D (_MainTex, IN.uv_MainTex), tex2D (_SecondTex, IN.uv_SecondTex), rango) *lerp(_Color,_Color2,rango);
+                    o.Metallic = lerp(_Metallic, _Metallic2,rango);
+                    o.Smoothness =lerp(_Glossiness, _Glossiness2,rango);
+                }
+                else{
+                    c=lerp (tex2D (_MainTex, IN.uv_MainTex), tex2D (_ThirdTex, IN.uv_ThirdTex), rango) *lerp(_Color,_Color3,rango);
+                    //c=lerp (tex2D (_MainTex, IN.uv_MainTex), tex2D (_SecondTex, IN.uv_SecondTex), rango) *lerp(_Color,_Color2,rango);
+                    //c = tex2D (_ThirdTex, IN.uv_ThirdTex) * _Color3;
+                    o.Metallic = lerp(_Metallic, _Metallic3,rango);
+                o.Smoothness =lerp(_Glossiness, _Glossiness3,rango);
+                }
+
+                //c=lerp (tex2D (_MainTex, IN.uv_MainTex), tex2D (_SecondTex, IN.uv_SecondTex), rango) *lerp(_Color,_Color2,rango);
+                
             }
             if(((IN.worldPos.y >= 11))&&(IN.worldPos.y < 40)){
                 if(o.Normal.y > 0.75f){

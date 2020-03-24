@@ -15,10 +15,18 @@ public class MeshGenerator : MonoBehaviour
 
     public GameObject player;
 
+    bool set_objects = true;
+
+    List<Vector3> grassPosition;
+    List<GameObject> grassObjects;
+    bool grassInstantiated = false;
+
+    List<Vector3> treePosition;
+    List<GameObject> treeObjects;
+    bool treeInstantiated = false;
+
     public int xPosition;   //posicion x del mundo. Se usa para mover el mesh a su posición.
     public int zPosition;   //posicion z del mundo
-
-    public bool collision;
 
     public int xTile;   //Coordenada x que va de 0 hasta el numero de meshes que se hayan creado
     public int zTile;   //Coordenada z que va de 0 hasta el numero de meshes que se hayan creado
@@ -158,6 +166,7 @@ public class MeshGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        set_objects = gameObject.GetComponentInParent<MeshBrain>( ).set_objects;
         player = GameObject.Find("player");
         mesh = new Mesh();
         mesh_lod();
@@ -168,7 +177,17 @@ public class MeshGenerator : MonoBehaviour
         UpdateMesh();
 
         meshc.sharedMesh = mesh;
-        
+
+        grassPosition = new List<Vector3>();
+        grassObjects = new List<GameObject>();
+
+        treePosition = new List<Vector3>();
+        treeObjects = new List<GameObject>();
+
+        if(set_objects){
+            generateGrassPosition();
+            generateTreePosition();
+        }
     }
     
     void CreateShape(){
@@ -222,6 +241,45 @@ public class MeshGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float offset = 50;
+        if(set_objects){
+            if(!grassInstantiated){
+                
+                if((player.transform.position.x>=xTile*240 -offset)&&(player.transform.position.x <= xTile*240 +240 + offset)&&(player.transform.position.z>=zTile*240-offset)&&(player.transform.position.z <= zTile*240 +240 + offset)){
+                    instantiateGrass();
+                    grassInstantiated=true;
+                }
+            }
+            else{
+                if((player.transform.position.x>=xTile*240-50)&&(player.transform.position.x <= xTile*240 +290)&&(player.transform.position.z>=zTile*240-50)&&(player.transform.position.z <= zTile*240 +290)){
+                    //instantiateGrass();
+                    //grassInstantiated=true;
+                }
+                else{
+                    destroyGrass();
+                    grassInstantiated=false;
+                }
+            }
+            float offset2 = 1000;
+
+            if(!treeInstantiated){
+                
+                if((player.transform.position.x>=xTile*240 -offset2)&&(player.transform.position.x <= xTile*240 +240 + offset2)&&(player.transform.position.z>=zTile*240-offset2)&&(player.transform.position.z <= zTile*240 +240 + offset2)){
+                    instantiateTree();
+                    treeInstantiated=true;
+                }
+            }
+            else{
+                if((player.transform.position.x>=xTile*240 -offset2)&&(player.transform.position.x <= xTile*240 +240 + offset2)&&(player.transform.position.z>=zTile*240-offset2)&&(player.transform.position.z <= zTile*240 +240 + offset2)){
+                    //instantiateGrass();
+                    //grassInstantiated=true;
+                }
+                else{
+                    destroyTree();
+                    treeInstantiated=false;
+                }
+            }
+        }
         if(use_lod){
             int last_lod =lod;
             mesh_lod();
@@ -231,8 +289,91 @@ public class MeshGenerator : MonoBehaviour
 
             if(last_lod!=lod){
                 CreateShape();
-                UpdateMesh();                
+                UpdateMesh();              
             }
+        }
+    }
+
+
+
+
+
+
+
+    void generateGrassPosition(){
+        for(int i=0;i<1000;i++){
+            
+        float x_random = Random.Range(0.0f, 240f-1f);
+        float z_random = Random.Range(0.0f, 240f-1f);
+        if(asignar_altura(x_random,z_random)<=10){
+            Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+.3f,zPosition + z_random);
+            grassPosition.Add(position);
+        }
+        }
+        
+    }
+
+    void instantiateGrass(){
+        for(int i=0;i<grassPosition.Count;i++){
+            //yield return new WaitForEndOfFrame(); 
+            GameObject bruh = Instantiate(gameObject.GetComponentInParent<MeshBrain>( ).grass, grassPosition[i], Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+            bruh.transform.SetParent(this.transform);
+            grassObjects.Add(bruh);
+        }
+    }
+
+    
+
+    void destroyGrass(){
+        for(int i=0;i<grassObjects.Count;i++){
+            Destroy(grassObjects[i]);
+        }
+    }
+
+
+    void generateTreePosition(){
+        for(int i=0;i<200;i++){
+            
+            float x_random = Random.Range(0.0f, 240f-1f);
+            float z_random = Random.Range(0.0f, 240f-1f);
+            var height = asignar_altura(x_random,z_random);
+            if((height<=10)&&((Random.Range(0,10)==1))){
+                Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)-1f,zPosition + z_random);
+                treePosition.Add(position);
+            }
+            else{
+                if((height>10)&&(height<=40)){
+                    Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)-1f,zPosition + z_random);
+                    treePosition.Add(position);
+                }
+                
+            }
+        }
+        
+    }
+
+    void instantiateTree(){
+        for(int i=0;i<treePosition.Count;i++){
+            //yield return new WaitForEndOfFrame();
+            if(treePosition[i].y<=10){
+                
+                GameObject bruh = Instantiate(gameObject.GetComponentInParent<MeshBrain>( ).arbol2, treePosition[i], Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+                bruh.transform.SetParent(this.transform);
+                treeObjects.Add(bruh);
+            }else{
+                GameObject bruh = Instantiate(gameObject.GetComponentInParent<MeshBrain>( ).arbol, treePosition[i], Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+                bruh.transform.SetParent(this.transform);
+                treeObjects.Add(bruh);
+            }
+            
+        }
+    }
+
+    
+
+    void destroyTree(){
+        for(int i=0;i<treeObjects.Count;i++){
+            Destroy(treeObjects[i]);
         }
     }
 }

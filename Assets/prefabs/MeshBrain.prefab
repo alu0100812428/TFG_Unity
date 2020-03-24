@@ -50,8 +50,8 @@ MonoBehaviour:
   - {fileID: 5439634764696276209, guid: c7ecf840c0db37c438662045590d9916, type: 3}
   - {fileID: 8537162814208959833, guid: e44be509f1aa2a04a8ee87423668fe6a, type: 3}
   - {fileID: 2148633981490024137, guid: 1810f79ada624df4da38d0c50941ed83, type: 3}
-  xSize: 5
-  zSize: 5
+  xSize: 20
+  zSize: 20
   borde: 0.1
   set_seed: 1
   set_objects: 1

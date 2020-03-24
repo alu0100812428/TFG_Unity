@@ -104,13 +104,14 @@ public class MeshBrain : MonoBehaviour
             for(int i=0;i<nRocks;i++){
                 spawnRocks();
             }
-            
+            /* 
             for(int i=0;i<nTrees;i++){
-                spawnTree();
+                //spawnTree();
             }
             for(int i=0;i<nGrass;i++){
                 //spawnGrass();
             }
+            */
         }
         
         

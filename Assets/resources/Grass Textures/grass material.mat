@@ -23,6 +23,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: c85f3fe5bd4ec704391840c5fed679ba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpTex:
+        m_Texture: {fileID: 2800000, guid: c85f3fe5bd4ec704391840c5fed679ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -43,12 +47,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: fab930705c06d6b4da2d63a0882944bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GradientMap:
+        m_Texture: {fileID: 2800000, guid: 54001c9f98ef1114dbb8942d53dc36c6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: ae30863ce5eaf4d49bd82c2905daae78, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 449af5ef913932646abc3856744c28a7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -63,6 +75,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: fab930705c06d6b4da2d63a0882944bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WindTexture:
+        m_Texture: {fileID: 2800000, guid: 564c1da40b3345844aa10939a0f87431, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.7
@@ -71,21 +87,27 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.18
     - _GlossyReflections: 1
-    - _GrassHeight: 1
+    - _GrassBlades: 1
+    - _GrassHeight: 0.5
     - _GrassWidth: 1
+    - _MaxCameraDistance: 10
     - _Metallic: 0.5
+    - _MinimunGrassBlades: 1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PositionRandomness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _WindSpeed: 50
     - _WindStength: 0.05
+    - _WindStrength: 0
     - _ZWrite: 1
     m_Colors:
     - _BackgroundColor: {r: 1, g: 0, b: 0, a: 1}
     - _Color: {r: 0.07456994, g: 1, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ForegroundColor: {r: 0, g: 0, b: 1, a: 1}
+    - _WindColor: {r: 1, g: 1, b: 1, a: 1}
