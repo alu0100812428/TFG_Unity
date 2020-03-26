@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.6839622, g: 0.87801677, b: 1, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.0005
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -339,12 +339,12 @@ PrefabInstance:
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: xSize
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: zSize
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
@@ -356,6 +356,12 @@ PrefabInstance:
       propertyPath: grassRendererObject
       value: 
       objectReference: {fileID: 8642307632254516620, guid: b0fc96f020af84541a55fb5eb406ac04,
+        type: 3}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: grass
+      value: 
+      objectReference: {fileID: 5936066722986634535, guid: 4c0d5ea52ec3bab498823a867c7b2e3b,
         type: 3}
     - target: {fileID: 7676690009619262452, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
