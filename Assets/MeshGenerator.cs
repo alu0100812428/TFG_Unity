@@ -301,7 +301,7 @@ public class MeshGenerator : MonoBehaviour
 
 
     void generateGrassPosition(){
-        for(int i=0;i<2000;i++){
+        for(int i=0;i<5000;i++){
             
         float x_random = Random.Range(0.0f, 240f-1f);
         float z_random = Random.Range(0.0f, 240f-1f);

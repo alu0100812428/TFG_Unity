@@ -14,8 +14,14 @@ public class Billboard_tree : MonoBehaviour
     }
 
     void faceCamera(){
+        /*
         if((transform.position.x<2000)&&(transform.position.y<2000)&&(transform.position.z<2000))
         {
+            this.transform.LookAt(camera);
+        }*/
+
+        if((camera.position.x <=transform.position.x + 1000)&&(camera.position.x >=transform.position.x - 1000)
+        &&(camera.position.z <=transform.position.z + 1000)&&(camera.position.z >=transform.position.z - 1000)){
             this.transform.LookAt(camera);
         }
     }
