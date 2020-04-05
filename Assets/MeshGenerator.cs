@@ -19,6 +19,7 @@ public class MeshGenerator : MonoBehaviour
 
     List<Vector3> grassPosition;
     List<GameObject> grassObjects;
+    List<int> grassType;
     bool grassInstantiated = false;
 
     List<Vector3> treePosition;
@@ -180,6 +181,7 @@ public class MeshGenerator : MonoBehaviour
 
         grassPosition = new List<Vector3>();
         grassObjects = new List<GameObject>();
+        grassType = new List<int>();
 
         treePosition = new List<Vector3>();
         treeObjects = new List<GameObject>();
@@ -302,13 +304,32 @@ public class MeshGenerator : MonoBehaviour
 
     void generateGrassPosition(){
         for(int i=0;i<5000;i++){
+
+            float bush_offset = 0.9f;
             
-        float x_random = Random.Range(0.0f, 240f-1f);
-        float z_random = Random.Range(0.0f, 240f-1f);
-        if(asignar_altura(x_random,z_random)<=40){
-            Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+.3f,zPosition + z_random);
-            grassPosition.Add(position);
-        }
+            float x_random = Random.Range(0.0f, 240f-1f);
+            float z_random = Random.Range(0.0f, 240f-1f);
+            if(asignar_altura(x_random,z_random)<=40){
+                if(Mathf.PerlinNoise((xPosition + x_random)*0.5f,(xPosition + x_random)*0.5f)>0.7f){
+                    int prob = Random.Range(0,5);
+                    if(prob == 0){
+                        grassType.Add(2);
+                    }else{
+                        grassType.Add(1);
+                        bush_offset=0.3f;
+                    }
+
+
+                    Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+bush_offset,zPosition + z_random);
+                    grassPosition.Add(position);
+                    
+                }
+                else{
+                    Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+.3f,zPosition + z_random);
+                    grassPosition.Add(position);
+                    grassType.Add(0);
+                }
+            }
         }
         
     }
@@ -316,7 +337,7 @@ public class MeshGenerator : MonoBehaviour
     IEnumerator instantiateGrass(){
         for(int i=0;i<grassPosition.Count;i++){
             //yield return new WaitForEndOfFrame(); 
-            GameObject grassObj = Instantiate(gameObject.GetComponentInParent<MeshBrain>( ).grass, grassPosition[i], Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+            GameObject grassObj = Instantiate(gameObject.GetComponentInParent<MeshBrain>( ).grass[grassType[i]], grassPosition[i], Quaternion.Euler(0, Random.Range(0f, 180f), 0));
             grassObj.transform.SetParent(this.transform);
             grassObjects.Add(grassObj);
             if(i%40 ==0){

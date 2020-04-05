@@ -8,7 +8,7 @@ public class MeshBrain : MonoBehaviour
     MeshGenerator[,] meshes;
     public GameObject arbol;
     public GameObject arbol2;
-    public GameObject grass;
+    public GameObject[] grass;
     public GameObject[] rock;
 
     public int xSize = 2;
@@ -48,7 +48,7 @@ public class MeshBrain : MonoBehaviour
         int zpos= (int)(z_random -z*240);
         if(meshes[x,z].asignar_altura(xpos,zpos)<=10){
             Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)+.3f,z_random);
-            Instantiate(grass, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+            Instantiate(grass[0], position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
         }
         
     }

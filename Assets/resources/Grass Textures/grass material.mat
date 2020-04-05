@@ -96,7 +96,7 @@ Material:
     - _BaseLight: 1
     - _BumpScale: 1
     - _Cull: 2
-    - _Cutoff: 0.172
+    - _Cutoff: 0.474
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -129,7 +129,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BackgroundColor: {r: 1, g: 0, b: 0, a: 1}
-    - _Color: {r: 0.252047, g: 0.9056604, b: 0.4121155, a: 1}
+    - _Color: {r: 0.0035599943, g: 0.754717, b: 0.18582593, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ForegroundColor: {r: 0, g: 0, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
