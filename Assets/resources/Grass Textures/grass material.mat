@@ -96,7 +96,7 @@ Material:
     - _BaseLight: 1
     - _BumpScale: 1
     - _Cull: 2
-    - _Cutoff: 0.474
+    - _Cutoff: 0.3
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1

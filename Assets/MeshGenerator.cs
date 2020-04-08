@@ -305,19 +305,20 @@ public class MeshGenerator : MonoBehaviour
     void generateGrassPosition(){
         for(int i=0;i<5000;i++){
 
-            float bush_offset = 0.9f;
+            float bush_offset = 0.6f;
             
             float x_random = Random.Range(0.0f, 240f-1f);
             float z_random = Random.Range(0.0f, 240f-1f);
             if(asignar_altura(x_random,z_random)<=40){
-                if(Mathf.PerlinNoise((xPosition + x_random)*0.5f,(xPosition + x_random)*0.5f)>0.7f){
-                    int prob = Random.Range(0,5);
-                    if(prob == 0){
-                        grassType.Add(2);
-                    }else{
+                if(Mathf.PerlinNoise((xPosition + x_random)*0.05f,(zPosition + z_random)*0.05f)>0.7f){
+                    int prob = Random.Range(0,10);
+                    if((prob >=0) && (prob<=8)){
                         grassType.Add(1);
-                        bush_offset=0.3f;
                     }
+                    else{
+                        grassType.Add(0);
+                    }
+                    bush_offset=0.3f;
 
 
                     Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+bush_offset,zPosition + z_random);
@@ -325,9 +326,17 @@ public class MeshGenerator : MonoBehaviour
                     
                 }
                 else{
-                    Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+.3f,zPosition + z_random);
+                    int prob = Random.Range(0,20);
+                    if(prob == 0){
+                        grassType.Add(2);
+                    }else{
+                        grassType.Add(0);
+                        bush_offset=0.3f;
+                    }
+                        
+                    Vector3 position = new Vector3(xPosition + x_random, asignar_altura(x_random,z_random)+bush_offset,zPosition + z_random);
                     grassPosition.Add(position);
-                    grassType.Add(0);
+                    //grassType.Add(0);
                 }
             }
         }
