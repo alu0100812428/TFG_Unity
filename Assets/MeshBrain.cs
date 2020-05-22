@@ -10,6 +10,7 @@ public class MeshBrain : MonoBehaviour
     public GameObject arbol2;
     public GameObject[] grass;
     public GameObject[] rock;
+    public GameObject particles;
 
     public int xSize = 2;
     public int zSize = 2;
@@ -17,6 +18,7 @@ public class MeshBrain : MonoBehaviour
     int nTrees=100;
     int nGrass = 2000;
     int nRocks = 10;
+    int nParticlesSpawns= 100;
 
     public bool set_seed=true;
     public bool set_objects = true;
@@ -64,6 +66,18 @@ public class MeshBrain : MonoBehaviour
             Instantiate(rock[Random.Range(0,rock.Length)], position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
         }
     }
+    void spawnParticlesPoint(){
+        float x_random = Random.Range(0.0f, xSize*240f-1f);
+        float z_random = Random.Range(0.0f, zSize*240f-1f);
+        int x = (int) x_random/240;
+        int z = (int) z_random/240;
+        int xpos= (int)(x_random -x*240);
+        int zpos= (int)(z_random -z*240);
+        if((meshes[x,z].asignar_altura(xpos,zpos)>=10) && (meshes[x,z].asignar_altura(xpos,zpos)<=40)){
+            Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos),z_random);
+            Instantiate(particles, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+        }
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -103,6 +117,10 @@ public class MeshBrain : MonoBehaviour
         if(set_objects){
             for(int i=0;i<nRocks;i++){
                 spawnRocks();
+            }
+
+            for(int i = 0;i<nParticlesSpawns;i++){
+                spawnParticlesPoint();
             }
             /* 
             for(int i=0;i<nTrees;i++){
