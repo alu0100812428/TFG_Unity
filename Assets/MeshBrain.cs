@@ -10,7 +10,7 @@ public class MeshBrain : MonoBehaviour
     public GameObject arbol2;
     public GameObject[] grass;
     public GameObject[] rock;
-    public GameObject particles;
+    public GameObject[] particles;
 
     public int xSize = 2;
     public int zSize = 2;
@@ -73,9 +73,15 @@ public class MeshBrain : MonoBehaviour
         int z = (int) z_random/240;
         int xpos= (int)(x_random -x*240);
         int zpos= (int)(z_random -z*240);
+        int particle_type;
+        if(Random.Range(1,10)<=7){
+            particle_type = 0;
+        }else{
+            particle_type = 1;
+        }
         if((meshes[x,z].asignar_altura(xpos,zpos)>=10) && (meshes[x,z].asignar_altura(xpos,zpos)<=40)){
             Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos),z_random);
-            Instantiate(particles, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
+            Instantiate(particles[particle_type], position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
         }
     }
     

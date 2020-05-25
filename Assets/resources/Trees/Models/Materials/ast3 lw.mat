@@ -8,10 +8,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ast3 lw
-  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: a13573ed7420d1744bd552222b7c1864, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 3b8d65f128cc7484a9c14ba4d91ea50d, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -27,6 +31,8 @@ Material:
     - _AO: 0.25714296
     - _BaseLight: 0.2964286
     - _Cutoff: 0.29642856
+    - _Glossiness: 0.5
+    - _Metallic: 0
     - _Occlusion: 0.3571428
     - _SquashAmount: 1
     m_Colors:

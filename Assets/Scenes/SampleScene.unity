@@ -343,13 +343,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
+      propertyPath: particles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
       propertyPath: xSize
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
       propertyPath: zSize
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
@@ -385,6 +390,24 @@ PrefabInstance:
       propertyPath: grass.Array.data[2]
       value: 
       objectReference: {fileID: 369790483223956421, guid: 1b7495c0be05af74f9c99822963448f8,
+        type: 3}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 4292003276837610782, guid: 12695a119faa8c74eb20488a27887abe,
+        type: 3}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: particles.Array.data[0]
+      value: 
+      objectReference: {fileID: 5541170372447632387, guid: 9eb191249f28d364a9452cbf831aafee,
+        type: 3}
+    - target: {fileID: 7676690009619262451, guid: 21d4fdf76f821f94fb02710c684bde62,
+        type: 3}
+      propertyPath: particles.Array.data[1]
+      value: 
+      objectReference: {fileID: 4292003276837610782, guid: 12695a119faa8c74eb20488a27887abe,
         type: 3}
     - target: {fileID: 7676690009619262452, guid: 21d4fdf76f821f94fb02710c684bde62,
         type: 3}
