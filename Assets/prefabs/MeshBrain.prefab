@@ -45,13 +45,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arbol: {fileID: 6906899653757740962, guid: 5ef239814a1cd064d9c3f8c8e0022444, type: 3}
   arbol2: {fileID: 3624511750112591464, guid: f6ac2d6ef7c5f2549bed01f54b7755c2, type: 3}
-  grass: {fileID: 5936066722986634535, guid: 4c0d5ea52ec3bab498823a867c7b2e3b, type: 3}
+  grass:
+  - {fileID: 4244289551833376091, guid: a88a8dd351e81b94a8f8709d4240b319, type: 3}
+  - {fileID: 8195870072070804164, guid: 88d1440e2aaad6946a4256bcac924035, type: 3}
+  - {fileID: 369790483223956421, guid: 1b7495c0be05af74f9c99822963448f8, type: 3}
   rock:
   - {fileID: 5439634764696276209, guid: c7ecf840c0db37c438662045590d9916, type: 3}
   - {fileID: 8537162814208959833, guid: e44be509f1aa2a04a8ee87423668fe6a, type: 3}
   - {fileID: 2148633981490024137, guid: 1810f79ada624df4da38d0c50941ed83, type: 3}
-  xSize: 20
-  zSize: 20
+  particles:
+  - {fileID: 5541170372447632387, guid: 9eb191249f28d364a9452cbf831aafee, type: 3}
+  - {fileID: 4292003276837610782, guid: 12695a119faa8c74eb20488a27887abe, type: 3}
+  xSize: 5
+  zSize: 5
   borde: 0.1
   set_seed: 1
   set_objects: 1
