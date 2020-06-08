@@ -61,8 +61,6 @@ public class MeshBrain : MonoBehaviour
 
         float seed = Random.Range(0.0f, 10000000f);
 
-        nTrees = xSize*zSize*nTrees;
-        nGrass = xSize*zSize*nGrass;
         nRocks = xSize*zSize*nRocks;
          
         for(int i=0;i<xSize;i++){
