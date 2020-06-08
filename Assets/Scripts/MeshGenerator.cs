@@ -9,7 +9,7 @@ public class MeshGenerator : MonoBehaviour
     int[] triangles;
     Vector2[] uvs;
 
-    int lod=1;          //Nivel de detalla del mesh
+    int lod=1;          //Nivel de detalle del mesh
 
     MeshCollider meshc;
 

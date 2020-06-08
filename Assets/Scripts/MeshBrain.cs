@@ -15,45 +15,13 @@ public class MeshBrain : MonoBehaviour
     public int xSize = 2;
     public int zSize = 2;
     public float borde = 0.05f;
-    int nTrees=100;
-    int nGrass = 2000;
+
     int nRocks = 10;
     int nParticlesSpawns= 100;
 
     public bool set_seed=true;
     public bool set_objects = true;
 
-    void spawnTree(){
-        float x_random = Random.Range(0.0f, xSize*240f-1f);
-        float z_random = Random.Range(0.0f, zSize*240f-1f);
-        int x = (int) x_random/240;
-        int z = (int) z_random/240;
-        int xpos= (int)(x_random -x*240);
-        int zpos= (int)(z_random -z*240);
-        if(((meshes[x,z].asignar_altura(xpos,zpos)>=10)&&(meshes[x,z].asignar_altura(xpos,zpos)<=40))){
-            Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)-1f,z_random);
-            Instantiate(arbol, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
-        }
-         
-        if((meshes[x,z].asignar_altura(xpos,zpos)<10)&&(Random.Range(0,10)==1)){
-            Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)-1f,z_random);
-            Instantiate(arbol2, position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
-        }
-    }
-
-    void spawnGrass(){
-        float x_random = Random.Range(0.0f, xSize*240f-1f);
-        float z_random = Random.Range(0.0f, zSize*240f-1f);
-        int x = (int) x_random/240;
-        int z = (int) z_random/240;
-        int xpos= (int)(x_random -x*240);
-        int zpos= (int)(z_random -z*240);
-        if(meshes[x,z].asignar_altura(xpos,zpos)<=10){
-            Vector3 position = new Vector3(x_random, meshes[x,z].asignar_altura(xpos,zpos)+.3f,z_random);
-            Instantiate(grass[0], position, Quaternion.Euler(0, Random.Range(0f, 180f), 0));
-        }
-        
-    }
     void spawnRocks(){
         float x_random = Random.Range(0.0f, xSize*240f-1f);
         float z_random = Random.Range(0.0f, zSize*240f-1f);
@@ -128,14 +96,6 @@ public class MeshBrain : MonoBehaviour
             for(int i = 0;i<nParticlesSpawns;i++){
                 spawnParticlesPoint();
             }
-            /* 
-            for(int i=0;i<nTrees;i++){
-                //spawnTree();
-            }
-            for(int i=0;i<nGrass;i++){
-                //spawnGrass();
-            }
-            */
         }
         
         
