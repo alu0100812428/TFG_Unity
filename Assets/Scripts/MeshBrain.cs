@@ -89,7 +89,7 @@ public class MeshBrain : MonoBehaviour
     void Start()
     {
         meshes = new MeshGenerator[xSize,zSize];
-        Material material = Resources.Load("materialbasico", typeof(Material)) as Material;
+        Material material = Resources.Load("terrain_material", typeof(Material)) as Material;
 
         float seed = Random.Range(0.0f, 10000000f);
 
